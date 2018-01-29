@@ -22,16 +22,27 @@
 </template>
 
 <script>
+import axios from 'axios'
+import md5 from 'js-md5'
   export default {
     data: () => ({
     valid:true,
-      name: '',
-      passWord: '',
+      name: '15151965292',
+      passWord: '123456',
       password:'Password',
     }),
     methods: {
       submit () {
-          this.$router.push('/home')
+        let dict = {
+            'Account':this.name,
+            'Password':md5(this.passWord)
+        }
+
+         axios.post('https://api.ilabpower.com/uc/api/Account/Login',dict).then(data=>{
+             debugger
+         })
+      
+        this.$router.push('/home')
       }
     }
   }
